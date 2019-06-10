@@ -10,6 +10,7 @@ namespace Entities
     {
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
+        public string UserCustomName { get; set; }
         public string UserEmail { get; set; }
         public int UserAge { get; set; }
         public string UserPassword { get;set;}

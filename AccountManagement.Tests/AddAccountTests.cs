@@ -13,30 +13,31 @@ namespace AccountManagement.Tests
     public class AddAccountTests
     {
         [Theory]
-        [InlineData("Lex","Carao","lex@bai.com",22, "321Password")]
-        public void MakeNewAccount_ShouldCreateAcount(string firstName, string lastName, string email,int age, string password)
+        [InlineData("Lex", "Carao", "testCustomname", "lex@bai.com", 22, "321Password")]
+        public void MakeNewAccount_ShouldCreateAcount(string firstName, string lastName, string customName, string email, int age, string password)
         {
             AddUser addUser = new AddUser();
-            int expected = AccountList.GetAccountList().GetSizeOfList()+1;
+            int expected = AccountList.GetAccountList().GetSizeOfList() + 1;
 
-            BaseUser newAccount = addUser.MakeNewAccount(firstName, lastName, email, age, password);
+            BaseUser newAccount = addUser.MakeNewAccount(firstName, lastName, customName, email, age, password);
 
             AccountList.GetAccountList().AddAccountToList(newAccount);
             int actual = AccountList.GetAccountList().GetSizeOfList();
-            
-            Assert.Equal(expected,actual);
+
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData("", "Carao", "lex@bai.com", 22, "321Password", "UserFirstName")]
-        [InlineData("Lex", "", "lex@bai.com", 22, "321Password", "UserLastName")]
-        [InlineData("Lex", "Carao", "", 22, "321Password", "UserEmail")]
-        [InlineData("Lex", "Carao", "lex@bai.com", 22, "", "UserPassword")]
-        public void MakeNewAccount_EmptyFieldsShouldFail(string firstName, string lastName, string email, int age, string password,string param)
+        [InlineData("", "Carao", "testCustomname", "lex@bai.com", 22, "321Password", "UserFirstName")]
+        [InlineData("Lex", "", "testCustomname", "lex@bai.com", 22, "321Password", "UserLastName")]
+        [InlineData("Lex", "Carao", "", "lex@bai.com", 22, "321Password", "UserCustomName")]
+        [InlineData("Lex", "Carao", "testCustomname", "", 22, "321Password", "UserEmail")]
+        [InlineData("Lex", "Carao", "testCustomname", "lex@bai.com", 22, "", "UserPassword")]
+        public void MakeNewAccount_EmptyFieldsShouldFail(string firstName, string lastName, string customName, string email, int age, string password, string param)
         {
             AddUser addUser = new AddUser();
 
-            Assert.Throws<ArgumentException>(param, () => addUser.MakeNewAccount(firstName, lastName, email, age, password));
+            Assert.Throws<ArgumentException>(param, () => addUser.MakeNewAccount(firstName, lastName, customName, email, age, password));
         }
 
         [Theory]
@@ -48,10 +49,28 @@ namespace AccountManagement.Tests
         {
             AddUser addUser = new AddUser();
 
-            Assert.Throws<ArgumentException>(param, () => addUser.MakeNewAccount("Lex", "Carao", "lex@bai.com", 22, password));
+            Assert.Throws<ArgumentException>(param, () => addUser.MakeNewAccount("Lex", "Carao", "testCustomname", "lex@bai.com", 22, password));
         }
 
+        [Theory]
+        [InlineData("lex1@bai.com", "UserEmail")]
+        public void MakeNewAccount_DuplicateEmailShouldFail(string email, string param)
+        {
+            AddUser addUser = new AddUser();
+            BaseUser newAccount=addUser.MakeNewAccount("Lex", "Carao", "testCustomname1", email, 22, "321Password");
+            AccountList.GetAccountList().AddAccountToList(newAccount);
+            Assert.Throws<ArgumentException>(param, () => addUser.MakeNewAccount("Lex", "Carao", "testCustomname1", email, 22, "321Password"));
+        }
 
+        [Theory]
+        [InlineData("lex9@bai.com","testcustomname2", "UserCustomName")]
+        public void MakeNewAccount_DuplicateCustomNameShouldFail(string email,string customName, string param)
+        {
+            AddUser addUser = new AddUser();
+            BaseUser newAccount = addUser.MakeNewAccount("Lex", "Carao", customName,"lex4@bai.com", 22, "321Password");
+            AccountList.GetAccountList().AddAccountToList(newAccount);
+            Assert.Throws<ArgumentException>(param, () => addUser.MakeNewAccount("Lex", "Carao", customName, "lex3@bai.com", 22, "321Password"));
+        }
 
     }
 }

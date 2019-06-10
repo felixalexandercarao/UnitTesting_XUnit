@@ -1,10 +1,11 @@
 ﻿using Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Repositories
 {
-    public class AccountList
+    public class AccountList:IEnumerable
     {
         List<BaseUser> users = new List<BaseUser>();
 
@@ -26,6 +27,11 @@ namespace Repositories
         public int GetSizeOfList()
         {
             return users.Count;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable)users).GetEnumerator();
         }
     }
 }
