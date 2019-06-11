@@ -1,26 +1,26 @@
 ﻿using Entities;
+using Repositories;
 using System;
 
 namespace Business
 {
     public class AddUser
     {
-        InputChecker inputChecker = new InputChecker();
-        public BaseUser MakeNewAccount(string newFirstname,string newLastname,string newCustomname, string newEmail, int newAge,string newPassword )
+        public BaseUser MakeNewUser(string newFirstname,string newLastname,string newCustomname, string newEmail, int newAge,string newPassword )
         {
-            inputChecker.NullInputCheck(newFirstname,  newLastname, newCustomname, newEmail, newAge, newPassword);
-            if (inputChecker.passwordCheck(newPassword)==false)
-            {
-                throw new ArgumentException("Password must have at least 8 characters, a number, and an uppercase letter", "UserPassword");
-            }
-            if (inputChecker.duplicateEmailcheck(newEmail) == false)
-            {
-                throw new ArgumentException("This email has been used", "UserEmail");
-            }
-            if (inputChecker.duplicateCustomnameCheck(newCustomname) == false)
+            InputChecker.NullInputCheck(newFirstname,  newLastname, newCustomname, newEmail, newAge);
+            if (UserList.GetUserList().duplicateCustomnameCheck(newCustomname) == false)
             {
                 throw new ArgumentException("This custom name has been used", "UserCustomName");
             }
+            if (UserList.GetUserList().duplicateEmailcheck(newEmail) == false)
+            {
+                throw new ArgumentException("This email has been used", "UserEmail");
+            }
+            if (InputChecker.passwordCheck(newPassword)==false)
+            {
+                throw new ArgumentException("Password must have at least 8 characters, a number, and an uppercase letter", "UserPassword");
+            }         
             BaseUser newAccount = new BaseUser
             {
                 UserFirstName = newFirstname,

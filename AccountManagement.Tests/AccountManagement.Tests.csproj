@@ -58,7 +58,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddAccountTests.cs" />
+    <Compile Include="AddUserTests.cs" />
+    <Compile Include="DeleteUserTests.cs" />
+    <Compile Include="DummyData.cs" />
+    <Compile Include="EditUserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

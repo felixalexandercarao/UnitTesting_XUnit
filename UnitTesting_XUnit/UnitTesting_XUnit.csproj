@@ -49,5 +49,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccountManagement.Tests\AccountManagement.Tests.csproj">
+      <Project>{cdd9fdda-9416-49e8-8738-62319a0ed8fd}</Project>
+      <Name>AccountManagement.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{602cac4d-e7f7-45b7-94ee-5dc54dcead14}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{e38c24a9-67c3-4287-b33d-1af82ebe1da1}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repositories\Repositories.csproj">
+      <Project>{6390a309-bdb7-4e80-ac6f-7f6a78a8e21c}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

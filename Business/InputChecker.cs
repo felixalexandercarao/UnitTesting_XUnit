@@ -8,7 +8,7 @@ namespace Business
 {
     public class InputChecker
     {
-        public bool passwordCheck(string newPassword)
+        public static bool passwordCheck(string newPassword)
         {
             bool upperResult = false;
             bool numberResult = false;
@@ -22,7 +22,6 @@ namespace Business
                 {
                     numberResult = true;
                 }
-
             }
             if (newPassword.Length < 8)
             {
@@ -30,34 +29,37 @@ namespace Business
             }
             return (numberResult && upperResult);
         }
-        public bool duplicateEmailcheck(string newEmail)
+        public static bool duplicateEmailcheck(string newEmail)
         {
-            foreach (BaseUser user in AccountList.GetAccountList())
+            bool result = true;
+            foreach (BaseUser user in UserList.GetUserList())
             {
                 if (newEmail == user.UserEmail)
                 {
-                    return false;
+                    return result =false;
                 }
             }
-            return true;
+            return result;
         }
-        public bool duplicateCustomnameCheck(string newCustomname)
-        {
-            foreach (BaseUser user in AccountList.GetAccountList())
-            {
-                if (newCustomname == user.UserCustomName)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        public void NullInputCheck(string newFirstname, string newLastname, string newCustomname, string newEmail, int newAge, string newPassword)
+        //public static bool duplicateCustomnameCheck(string newCustomname)
+        //{
+        //    bool result = true;
+        //    foreach (BaseUser user in UserList.GetUserList())
+        //    {
+        //        if (newCustomname == user.UserCustomName)
+        //        {
+        //            result= false;
+        //        }
+        //    }
+        //    return result;
+        //}
+        public static void NullInputCheck(string newFirstname, string newLastname, string newCustomname, string newEmail, int newAge)
         {
             if (string.IsNullOrWhiteSpace(newFirstname))
             {
                 throw new ArgumentException("Please input your first name", "UserFirstName");
             }
+
             if (string.IsNullOrWhiteSpace(newLastname))
             {
                 throw new ArgumentException("Please input your last name", "UserLastName");
@@ -69,10 +71,6 @@ namespace Business
             if (string.IsNullOrWhiteSpace(newEmail))
             {
                 throw new ArgumentException("Please input your email", "UserEmail");
-            }
-            if (string.IsNullOrWhiteSpace(newPassword))
-            {
-                throw new ArgumentException("Please input a password", "UserPassword");
             }
         }
     }
