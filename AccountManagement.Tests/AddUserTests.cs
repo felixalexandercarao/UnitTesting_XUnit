@@ -12,18 +12,17 @@ namespace AccountManagement.Tests
 {
     public class AddUserTests
     {
-        [Theory]
-        [InlineData("Lex", "Carao", "addtestscustname1", "email1@addtests.com", 22, "321Password")]
-        public void MakeNewUser_ShouldCreateAcount(string firstName, string lastName, string customName, string email, int age, string password)
+        [Fact]
+        public void MakeNewUser_ShouldCreateAcount()
         {
             AddUser addUser = new AddUser();
             int expected = UserList.GetUserList().GetSizeOfList() + 1;
 
-            BaseUser newAccount = addUser.MakeNewUser(firstName, lastName, customName, email, age, password);
+            BaseUser newAccount = addUser.MakeNewUser("Lex", "Carao", "addtestscustname1", "email1@addtests.com", 22, "321Password");
 
             UserList.GetUserList().AddUserToList(newAccount);
             int actual = UserList.GetUserList().GetSizeOfList();
-
+            Assert.Equal(UserList.GetUserList().GetUserWithEmail("email1@addtests.com", "321Password"),newAccount);
             Assert.Equal(expected, actual);
         }
 
@@ -65,5 +64,21 @@ namespace AccountManagement.Tests
             UserList.GetUserList().AddUserToList(newAccount);
             Assert.Throws<ArgumentException>(param, () => addUser.MakeNewUser("Lex", "Carao", customName, "email4@addtests.com", 22, "321Password"));
         }
+
+        //[Theory]
+        //[ClassData(typeof(DummyData.AddUserTestDataWrongTypes))]
+        //public void MakeNewUser_WrongInputTypesShouldntAdd(string firstName, string lastName, string customName, string email, int age, string password)
+        //{
+        //    AddUser addUser = new AddUser();
+        //    int expected = UserList.GetUserList().GetSizeOfList() + 1;
+
+        //    BaseUser newAccount = addUser.MakeNewUser(firstName, lastName, customName, email, age, password);
+
+        //    UserList.GetUserList().AddUserToList(newAccount);
+        //    int actual = UserList.GetUserList().GetSizeOfList();
+
+        //    Assert.Equal(expected, actual);
+        //}
+
     }
 }

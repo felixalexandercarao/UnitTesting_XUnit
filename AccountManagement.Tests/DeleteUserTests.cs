@@ -27,29 +27,29 @@ namespace AccountManagement.Tests
             Assert.True(InputChecker.duplicateEmailcheck(email));
             Assert.Equal(expectedSize,actualSize);
         }
-        [Theory]
-        [InlineData("email4@deletetests.com", "321Pasword","UserPassword")]
-        public void DeleteUser_CorrectEmailWrongPasswordShouldFail(string email, string password,string param)
-        {
-            AddUser addUser = new AddUser();
+        //[Theory]
+        //[InlineData("email4@deletetests.com", "321Pasword","UserPassword")]
+        //public void DeleteUser_CorrectEmailWrongPasswordShouldFail(string email, string password,string param)
+        //{
+        //    AddUser addUser = new AddUser();
 
-            BaseUser newUser = addUser.MakeNewUser("Lex", "Carao", "deletetestscustname4", email, 22, "123Password");
-            UserList.GetUserList().AddUserToList(newUser);
+        //    BaseUser newUser = addUser.MakeNewUser("Lex", "Carao", "deletetestscustname4", email, 22, "123Password");
+        //    UserList.GetUserList().AddUserToList(newUser);
 
-            Assert.Throws<ArgumentException>(param, () => DeleteUser.deleteUser(email, password));
-        }
+        //    Assert.Throws<ArgumentException>(param, () => DeleteUser.deleteUser(email, password));
+        //}
 
-        [Theory]
-        [InlineData("email5@deletetests.com", "321Pasword", "UserPassword")]
-        public void DeleteUser_CorrectPasswordWrongEmailShouldFail(string email, string password, string param)
-        {
-            AddUser addUser = new AddUser();
+        //[Theory]
+        //[InlineData("email5@deletetests.com", "321Pasword", "UserPassword")]
+        //public void DeleteUser_CorrectPasswordWrongEmailShouldFail(string email, string password, string param)
+        //{
+        //    AddUser addUser = new AddUser();
 
-            BaseUser newUser = addUser.MakeNewUser("Lex", "Carao", "deletetestscustname5", "lex1332bai.com", 22,password);
-            UserList.GetUserList().AddUserToList(newUser);
+        //    BaseUser newUser = addUser.MakeNewUser("Lex", "Carao", "deletetestscustname5", "lex1332bai.com", 22,password);
+        //    UserList.GetUserList().AddUserToList(newUser);
 
-            Assert.Throws<ArgumentException>(param, () => DeleteUser.deleteUser(email, password));
-        }
+        //    Assert.Throws<ArgumentException>(param, () => DeleteUser.deleteUser(email, password));
+        //}
 
 
 

@@ -44,5 +44,18 @@ namespace AccountManagement.Tests
             }
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
+
+        public class AddUserTestDataWrongTypes : IEnumerable<object[]>
+        {
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                yield return new object[] { 123, "Carao", "testCustomname", "lex@bai.com", 22, "321Password", "UserFirstName" };
+                yield return new object[] { "Lex", 321, "testCustomname", "lex@bai.com", 22, "321Password", "UserLastName" };
+                yield return new object[] { "Lex", "Carao", 123, "lex@bai.com", 22, "321Password", "UserCustomName" };
+                yield return new object[] { "Lex", "Carao", "testCustomname", 123, 22, "321Password", "UserEmail" };
+                yield return new object[] { "Lex", "Carao", "testCustomname", "lex@bai.com", "22", "321Password", "UserAge" };
+            }
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        }
     }
 }
