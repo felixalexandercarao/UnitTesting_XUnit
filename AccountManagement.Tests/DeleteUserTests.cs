@@ -18,9 +18,9 @@ namespace AccountManagement.Tests
         {
             AddUser addUser = new AddUser();
             BaseUser newUsertoDelete = addUser.MakeNewUser("Lex", "Carao", "deletetestscustname1", email, 22, password);          
-            UserList.GetUserList().AddUserToList(newUsertoDelete);
-            UserList.GetUserList().AddUserToList(addUser.MakeNewUser("Lex", "Carao", "deletetestscustname2", "email2@deletetests.com", 22, "kobeK911"));
-            UserList.GetUserList().AddUserToList(addUser.MakeNewUser("Lex", "Carao", "deletetestscustname3", "email3@deletetests.com", 22, "kosS111be"));
+            addUser.AddUserToRepo(newUsertoDelete);
+            addUser.AddUserToRepo(addUser.MakeNewUser("Lex", "Carao", "deletetestscustname2", "email2@deletetests.com", 22, "kobeK911"));
+            addUser.AddUserToRepo(addUser.MakeNewUser("Lex", "Carao", "deletetestscustname3", "email3@deletetests.com", 22, "kosS111be"));
             int expectedSize = UserList.GetUserList().GetSizeOfList()-1;
             DeleteUser.deleteUser(email, password);
             int actualSize = UserList.GetUserList().GetSizeOfList();

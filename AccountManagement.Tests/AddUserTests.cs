@@ -20,7 +20,7 @@ namespace AccountManagement.Tests
 
             BaseUser newAccount = addUser.MakeNewUser("Lex", "Carao", "addtestscustname1", "email1@addtests.com", 22, "321Password");
 
-            UserList.GetUserList().AddUserToList(newAccount);
+            addUser.AddUserToRepo(newAccount);
             int actual = UserList.GetUserList().GetSizeOfList();
             Assert.Equal(UserList.GetUserList().GetUserWithEmail("email1@addtests.com", "321Password"),newAccount);
             Assert.Equal(expected, actual);

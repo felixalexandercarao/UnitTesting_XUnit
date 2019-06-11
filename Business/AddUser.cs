@@ -32,5 +32,9 @@ namespace Business
             };
             return newAccount;
         }
+        public void AddUserToRepo(BaseUser newUser)
+        {
+            UserList.GetUserList().AddUserToList(newUser);
+        }
     }
 }
